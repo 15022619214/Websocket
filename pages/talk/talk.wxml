@@ -1,0 +1,16 @@
+<scroll-view  class='taskWindow' scroll-y="true" style='height:{{height}}px'>
+    <block wx:for='{{userSocketList}}' wx:key=''>
+        <view class='msg_mask'>
+          <view class='msg_img'>
+            <image src='{{item.userImg}}'></image>
+          </view>
+          <view class='msg_content'>{{item.msg}}</view>
+        </view>
+    </block>
+</scroll-view>
+<view class='taskBottom'>
+  <form bindsubmit='tasKform'>
+    <input type='text' name='taskval'  class='taskInput' value='{{sendMessage}}'></input>
+    <button type='primary' size='mini' form-type='submit'  class='taskBtn'>发送</button>
+  </form>
+</view>

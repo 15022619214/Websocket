@@ -1,16 +1,36 @@
-<scroll-view  class='taskWindow' scroll-y="true" style='height:{{height}}px'>
-    <block wx:for='{{userSocketList}}' wx:key=''>
-        <view class='msg_mask'>
-          <view class='msg_img'>
-            <image src='{{item.userImg}}'></image>
-          </view>
-          <view class='msg_content'>{{item.msg}}</view>
+<scroll-view class='taskWindow' scroll-y="true" style='height:{{height}}px' scroll-into-view='{{findU}}' scroll-with-animation='true'>
+  <block wx:for='{{userSocketList}}' wx:key='' wx:for-index='index'>
+    <view class='msg_mask_Left' wx:if='{{item.use == 1}}' id='msg{{index}}'>
+      <view class='msg_img'>
+        <view class='msg_imgs'>
+          <image src='{{item.userImg}}'></image>
         </view>
-    </block>
+      </view>
+      <view class='msg_content_Left'>
+        <view class='msg_content_Left_img'>
+          <image src='../images/left.png'></image>
+        </view>
+        <view class='msg_content_Left_text'>{{item.msg}}</view>
+      </view>
+    </view>
+    <view class='msg_mask_Right' wx:elif='{{item.use == 2}}' id='msg{{index}}'>
+      <view class='msg_content_Right'>
+        <view class='msg_content_Right_text'>{{item.msg}}</view>
+        <view class='msg_content_Right_img'>
+          <image src='../images/right.png'></image>
+        </view>
+      </view>
+      <view class='msg_img'>
+        <view class='msg_imgs'>
+          <image src='{{item.userImg}}'></image>
+        </view>
+      </view>
+    </view>
+  </block>
 </scroll-view>
 <view class='taskBottom'>
   <form bindsubmit='tasKform'>
-    <input type='text' name='taskval'  class='taskInput' value='{{sendMessage}}'></input>
-    <button type='primary' size='mini' form-type='submit'  class='taskBtn'>发送</button>
+    <input type='text' name='taskval' class='taskInput' value='{{sendMessage}}'></input>
+    <button type='primary' size='mini' form-type='submit' class='taskBtn'>发送</button>
   </form>
 </view>

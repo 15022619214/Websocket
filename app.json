@@ -1,13 +1,13 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/talk/talk",
     "pages/logs/logs"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#222",
     "navigationBarTitleText": "聊天Test",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "white"
   }
 }

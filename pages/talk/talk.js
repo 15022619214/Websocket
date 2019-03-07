@@ -12,7 +12,8 @@ Page({
   data: {
     userSocketList: [],
     sendMessage: '',
-    height: 0
+    height: 0,
+    findU: ''
   },
 
   /**
@@ -48,14 +49,18 @@ Page({
     var this_ = this;
     wx.onSocketMessage(function(res) {
       console.log('监听**[服务器返回消息]')
-      console.log(JSON.parse(res.data));
       userSocketList = this_.data.userSocketList;
-
-      userSocketList.push(JSON.parse(res.data));
+      var json = JSON.parse(res.data);
+      if (json.usercode == app.globalData.userCode) {
+        json.use = 1;
+      } else {
+        json.use = 2;
+      }
+      userSocketList.push(json);
       this_.setData({
         userSocketList: userSocketList,
+        findU: 'msg' + (userSocketList.length - 1)
       })
-      console.log(this_.data.userSocketList)
     })
   },
 
@@ -70,7 +75,7 @@ Page({
     wx.getSystemInfo({
       success: function(res) {
         this_.setData({
-          height: res.windowHeight - 40,
+          height: res.windowHeight - 50,
         })
       }
     });
@@ -132,9 +137,11 @@ Page({
   tasKform: function(res) {
     var this_ = this;
     let sendMsg = {
+      usercode: app.globalData.userCode,
       userImg: app.globalData.userInfo.avatarUrl,
       msg: res.detail.value.taskval,
-      msgTime: util.formatTime(new Date())
+      msgTime: util.formatTime(new Date()),
+      use: 0
     }
     wx.sendSocketMessage({
       data: JSON.stringify(sendMsg),
@@ -144,6 +151,5 @@ Page({
         })
       }
     })
-
   }
 })
